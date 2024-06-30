@@ -814,5 +814,5 @@ export const getBuildTargetFromUA = (userAgent: string | null) => {
       return esma;
     }
   }
-  return "esnext";
+  return "es2015";
 };
