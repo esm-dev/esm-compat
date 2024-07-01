@@ -1,7 +1,7 @@
 {
   "name": "esm-compat",
   "description": "Checks the ES6 compatibility from an `User-Agent` string.",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "type": "module",
   "module": "dist/compat.js",
   "types": "types/compat.d.ts",
