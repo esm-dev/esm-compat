@@ -776,7 +776,7 @@ export const getBuildTargetFromUA = (userAgent: string | null) => {
   if (!userAgent || userAgent.startsWith("curl/")) {
     return "esnext";
   }
-  if (userAgent.startsWith("es/") && userAgent.length === 7) {
+  if (userAgent.startsWith("ES/")) {
     const t = "es" + userAgent.slice(3);
     if (targets.has(t)) {
       return t;
