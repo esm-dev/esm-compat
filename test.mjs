@@ -2,7 +2,7 @@ import { getBuildTargetFromUA } from "./dist/compat.js";
 
 const testData = {
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36":
-    "es2022",
+    "es2023",
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15":
     "es2021",
     "ES/2022": "es2022",

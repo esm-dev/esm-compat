@@ -12,6 +12,8 @@ export const targets = new Set([
   "es2020",
   "es2021",
   "es2022",
+  "es2023",
+  "es2024",
   "esnext",
   "deno",
   "denonext",
@@ -402,6 +404,7 @@ const jsTable: Record<string, Record<string, Version>> = {
     Chrome: [74, 0, 0],
     Deno: [1, 0, 0],
     Edge: [79, 0, 0],
+    ES: [2023, 0, 0],
     Firefox: [67, 0, 0],
     Hermes: [0, 7, 0],
     IOS: [13, 4, 0],
@@ -414,7 +417,7 @@ const jsTable: Record<string, Record<string, Version>> = {
     Chrome: [91, 0, 0],
     Deno: [1, 17, 0],
     Edge: [91, 0, 0],
-    Node: [22, 0, 0],
+    Node: [2, 0, 0],
   },
   ImportAttributes: {
     Chrome: [123, 0, 0],
@@ -479,12 +482,14 @@ const jsTable: Record<string, Record<string, Version>> = {
     Opera: [33, 0, 0],
     Safari: [10, 0, 0],
   },
-  NodeColonPrefixImport: {
-    Node: [14, 13, 1],
-  },
-  NodeColonPrefixRequire: {
-    Node: [16, 0, 0],
-  },
+  // NodeColonPrefixImport: {
+  //   ES: [0, 0, 0],
+  //   Node: [14, 13, 1],
+  // },
+  // NodeColonPrefixRequire: {
+  //   ES: [0, 0, 0],
+  //   Node: [16, 0, 0],
+  // },
   NullishCoalescing: {
     // Note: The latest version of "IE" failed this test: nullish coalescing operator (??)
     // Note: The latest version of "Rhino" failed this test: nullish coalescing operator (??)
@@ -622,7 +627,9 @@ const jsTable: Record<string, Record<string, Version>> = {
     Opera: [51, 0, 0],
     Safari: [11, 1, 0],
   },
-  RegexpSetNotation: {},
+  RegexpSetNotation: {
+    ES: [2024, 0, 0],
+  },
   RegexpStickyAndUnicodeFlags: {
     // Note: The latest version of "IE" failed 6 tests including: RegExp "y" and "u" flags: "u" flag
     // Note: The latest version of "Rhino" failed 4 tests including: RegExp "y" and "u" flags: "u" flag
@@ -739,9 +746,9 @@ const getUnsupportedFeatures = (name: string, versionStr: string) => {
 };
 
 const versionLargeThan = (v1: Version, v2: Version) => {
-  return v1[0] > v2[0] ||
-    (v1[0] === v2[0] && v1[1] > v2[1]) ||
-    (v1[0] === v2[0] && v1[1] === v2[1] && v1[2] > v2[2]);
+  return v1[0] > v2[0]
+    || (v1[0] === v2[0] && v1[1] > v2[1])
+    || (v1[0] === v2[0] && v1[1] === v2[1] && v1[2] > v2[2]);
 };
 
 const getBrowserInfo = (ua: string): { name?: string; version?: string } => {
@@ -756,6 +763,8 @@ const getBrowserInfo = (ua: string): { name?: string; version?: string } => {
 };
 
 const esmaUnsupportedFeatures: [string, number][] = [
+  "es2024",
+  "es2023",
   "es2022",
   "es2021",
   "es2020",
@@ -794,10 +803,10 @@ export const getBuildTargetFromUA = (userAgent: string | null) => {
     return "denonext";
   }
   if (
-    userAgent === "undici" ||
-    userAgent.startsWith("Node.js/") ||
-    userAgent.startsWith("Node/") ||
-    userAgent.startsWith("Bun/")
+    userAgent === "undici"
+    || userAgent.startsWith("Node.js/")
+    || userAgent.startsWith("Node/")
+    || userAgent.startsWith("Bun/")
   ) {
     return "node";
   }
