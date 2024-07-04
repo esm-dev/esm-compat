@@ -1,13 +1,13 @@
 {
   "name": "esm-compat",
   "description": "Checks the ES6 compatibility from an `User-Agent` string.",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "type": "module",
   "module": "dist/compat.js",
   "types": "types/compat.d.ts",
   "scripts": {
     "prepublishOnly": "pnpm test",
-    "build": "pnpm esbuild src/compat.ts --outdir=dist --format=esm --platform=browser",
+    "build": "pnpm esbuild src/compat.ts --outdir=dist --format=esm --platform=browser --target=esnext",
     "test": "pnpm build && node test.mjs"
   },
   "files": [
@@ -16,7 +16,7 @@
   ],
   "devDependencies": {
     "@types/ua-parser-js": "0.7.39",
-    "esbuild": "0.22.0"
+    "esbuild": "0.23.0"
   },
   "dependencies": {
     "ua-parser-js": "^1.0.38"
