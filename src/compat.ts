@@ -417,7 +417,7 @@ const jsTable: Record<string, Record<string, Version>> = {
     Chrome: [91, 0, 0],
     Deno: [1, 17, 0],
     Edge: [91, 0, 0],
-    Node: [2, 0, 0],
+    Node: [22, 0, 0],
   },
   ImportAttributes: {
     Chrome: [123, 0, 0],
@@ -482,14 +482,14 @@ const jsTable: Record<string, Record<string, Version>> = {
     Opera: [33, 0, 0],
     Safari: [10, 0, 0],
   },
-  // NodeColonPrefixImport: {
-  //   ES: [0, 0, 0],
-  //   Node: [14, 13, 1],
-  // },
-  // NodeColonPrefixRequire: {
-  //   ES: [0, 0, 0],
-  //   Node: [16, 0, 0],
-  // },
+  NodeColonPrefixImport: {
+    ES: [0, 0, 0],
+    Node: [14, 13, 1],
+  },
+  NodeColonPrefixRequire: {
+    ES: [0, 0, 0],
+    Node: [16, 0, 0],
+  },
   NullishCoalescing: {
     // Note: The latest version of "IE" failed this test: nullish coalescing operator (??)
     // Note: The latest version of "Rhino" failed this test: nullish coalescing operator (??)
@@ -780,7 +780,7 @@ const esmaUnsupportedFeatures: [string, number][] = [
 
 const rVersion = /^(\d+)\.(\d+)\.(\d+)/;
 
-/** get build target from the `User-Agent` header by checking the `jsTable` object. */
+/** get the build target for esm.sh service by checking the given `user-agent` header. */
 export const getBuildTargetFromUA = (userAgent: string | null) => {
   if (!userAgent || userAgent.startsWith("curl/")) {
     return "esnext";
@@ -824,4 +824,13 @@ export const getBuildTargetFromUA = (userAgent: string | null) => {
     }
   }
   return "es2015";
+};
+
+/** get the esma version of a browser by checking the given `user-agent` header. */
+export const getEsmaVersionFromUA = (userAgent: string | null) => {
+  const target = getBuildTargetFromUA(userAgent);
+  if (target.startsWith("es")) {
+    return target;
+  }
+  return "esnext";
 };
