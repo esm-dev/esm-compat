@@ -482,14 +482,14 @@ const jsTable: Record<string, Record<string, Version>> = {
     Opera: [33, 0, 0],
     Safari: [10, 0, 0],
   },
-  NodeColonPrefixImport: {
-    ES: [0, 0, 0],
-    Node: [14, 13, 1],
-  },
-  NodeColonPrefixRequire: {
-    ES: [0, 0, 0],
-    Node: [16, 0, 0],
-  },
+  // NodeColonPrefixImport: {
+  //   ES: [0, 0, 0],
+  //   Node: [14, 13, 1],
+  // },
+  // NodeColonPrefixRequire: {
+  //   ES: [0, 0, 0],
+  //   Node: [16, 0, 0],
+  // },
   NullishCoalescing: {
     // Note: The latest version of "IE" failed this test: nullish coalescing operator (??)
     // Note: The latest version of "Rhino" failed this test: nullish coalescing operator (??)
@@ -726,7 +726,7 @@ const jsTable: Record<string, Record<string, Version>> = {
 
 const getUnsupportedFeatures = (name: string, versionStr: string) => {
   const features = Object.keys(jsTable);
-  const version = versionStr.split(".").slice(0, 3).map((v) => parseInt(v, 10));
+  const version = versionStr.split(".").map((v) => parseInt(v, 10));
   if (version.some((v) => isNaN(v))) {
     // invalid version
     return [];
@@ -758,7 +758,6 @@ const getBrowserInfo = (ua: string): { name?: string; version?: string } => {
   } else if (info.name === "Safari" && ua.includes("iPhone;")) {
     info.name = "iOS";
   }
-  return uaParser(ua).browser;
   return info;
 };
 
@@ -817,9 +816,9 @@ export const getBuildTargetFromUA = (userAgent: string | null) => {
   const unsupportFeatures = getUnsupportedFeatures(
     browser.name,
     browser.version,
-  );
+  ).length;
   for (const [esma, n] of esmaUnsupportedFeatures) {
-    if (unsupportFeatures.length <= n) {
+    if (unsupportFeatures <= n) {
       return esma;
     }
   }
