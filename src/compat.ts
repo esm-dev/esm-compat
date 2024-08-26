@@ -753,7 +753,7 @@ const versionLargeThan = (v1: Version, v2: Version) => {
 
 const getBrowserInfo = (ua: string): { name?: string; version?: string } => {
   const info = uaParser(ua).browser;
-  if (info.name === "HeadlessChrome") {
+  if (info.name === "Chrome Headless") {
     info.name = "Chrome";
   } else if (info.name === "Safari" && ua.includes("iPhone;")) {
     info.name = "iOS";
