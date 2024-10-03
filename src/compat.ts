@@ -645,15 +645,17 @@ const jsTable: Record<string, Record<string, Version>> = {
     Safari: [12, 0, 0],
   },
   RegexpUnicodePropertyEscapes: {
-    // Note: The latest version of "Chrome" failed this test: RegExp Unicode Property Escapes: Unicode 15.1
-    // Note: The latest version of "Firefox" failed this test: RegExp Unicode Property Escapes: Unicode 15.1
+    // Note: The latest version of "Chrome" failed this test: RegExp Unicode Property Escapes: Unicode 16.0
+    // Note: The latest version of "Edge" failed this test: RegExp Unicode Property Escapes: Unicode 16.0
+    // Note: The latest version of "Firefox" failed 2 tests including: RegExp Unicode Property Escapes: Unicode 15.1
     // Note: The latest version of "Hermes" failed 8 tests including: RegExp Unicode Property Escapes: Unicode 11
     // Note: The latest version of "IE" failed 8 tests including: RegExp Unicode Property Escapes: Unicode 11
-    // Note: The latest version of "IOS" failed this test: RegExp Unicode Property Escapes: Unicode 15.1
+    // Note: The latest version of "IOS" failed this test: RegExp Unicode Property Escapes: Unicode 16.0
+    // Note: The latest version of "Node" failed this test: RegExp Unicode Property Escapes: Unicode 16.0
     // Note: The latest version of "Rhino" failed 8 tests including: RegExp Unicode Property Escapes: Unicode 11
-    // Note: The latest version of "Safari" failed this test: RegExp Unicode Property Escapes: Unicode 15.1
+    // Note: The latest version of "Safari" failed this test: RegExp Unicode Property Escapes: Unicode 16.0
     ES: [2018, 0, 0],
-    Node: [21, 3, 0],
+    Opera: [111, 0, 0],
   },
   RestArgument: {
     // Note: The latest version of "Hermes" failed this test: rest parameters: function 'length' property
@@ -781,7 +783,7 @@ const rVersion = /^(\d+)\.(\d+)\.(\d+)/;
 
 /** get the build target for esm.sh service by checking the given `user-agent` header. */
 export const getBuildTargetFromUA = (userAgent: string | null) => {
-  if (!userAgent || userAgent.startsWith("curl/")) {
+  if (!userAgent || userAgent.startsWith("curl/") || userAgent.startsWith("Visual Studio Code")) {
     return "esnext";
   }
   if (userAgent.startsWith("ES/")) {
